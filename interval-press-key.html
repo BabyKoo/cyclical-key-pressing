@@ -2,11 +2,10 @@
  * @Author: Hugo Koo
  * @Date: 2021-12-14 09:17:52
  * @LastEditors: Hugo Koo
- * @LastEditTime: 2021-12-14 09:17:53
+ * @LastEditTime: 2021-12-22 16:00:21
  * @Description: 
  * @FilePath: /interval-press-key/interval-press-key.html
 -->
-
 <!DOCTYPE html>
 
 <head>
@@ -23,7 +22,7 @@
     <span>Set Time Gap: </span>
     <input id="time-gap-input" placeholder="secs" value="60" />
     <span>Secs. </span>
-    <button onclick="execute(document.getElementById('time-gap-input').value)">Confirm</button>
+    <button onclick="execute(document.getElementById('time-gap-input').value)">Set</button>
     <div></div>
     <button onclick="execute(60)">1 min</button>
     <button onclick="execute(3600)">1 h</button>
@@ -42,6 +41,10 @@
             document.getElementById("main-msg").innerText = status;
             document.getElementById("counter").innerText = "Counts: " + counter;
         }
+        function counterClear() {
+            counter = 0;
+            document.getElementById("counter").innerText = "Counts: " + counter;
+        }
         function showTimeGap(gap) {
             document.getElementById("time-gap").innerText = "Time gap: " + gap + " sec(s)";
         }
@@ -54,6 +57,7 @@
             console.log(p);
             document.getElementById("begin-at").innerText = "Begin @ " + new Date;
             pressKey("{SCROLLLOCK}");
+            counterClear()
             counterPlus();
             showTimeGap(p);
             clearInterval(pressKeyIntervalID);
