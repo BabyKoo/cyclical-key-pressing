@@ -1,4 +1,4 @@
 # Usage
-Be used for hitting a specified key in interval time. 
+Be used for hitting a specified keybroad key in a regular time. 
 
-Supported on IE browser only. 
+Supported on MS IE browser or else IE mode of MS Edge browser only. 
