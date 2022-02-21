@@ -36,7 +36,7 @@
             objWs.SendKeys(key);
             status = "Key: " + key;
         }
-        function counterPlus() {
+        function counterIncrease() {
             counter++;
             document.getElementById("main-msg").innerText = status;
             document.getElementById("counter").innerText = "Counts: " + counter;
@@ -61,7 +61,7 @@
             counterPlus();
             showTimeGap(p);
             clearInterval(pressKeyIntervalID);
-            pressKeyIntervalID = setInterval("pressKey('{SCROLLLOCK}'); counterPlus();", parseInt(p) * 1000);
+            pressKeyIntervalID = setInterval("pressKey('{SCROLLLOCK}'); counterIncrease();", parseInt(p) * 1000);
         };
     </script>
 </body>
