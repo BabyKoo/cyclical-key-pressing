@@ -36,7 +36,7 @@
             objWs.SendKeys(key);
             status = "Key: " + key;
         }
-        function counterPlus() {
+        function counterIncrease() {
             counter++;
             document.getElementById("main-msg").innerText = status;
             document.getElementById("counter").innerText = "Counts: " + counter;
@@ -56,7 +56,7 @@
                 counterClear();
             };
             pressKey(key); 
-            counterPlus();
+            counterIncrease();
         };
         showCurrentTime();
         setInterval("showCurrentTime()", 1000);
