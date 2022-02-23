@@ -49,7 +49,7 @@
             document.getElementById("time-gap").innerText = "Time gap: " + gap + " sec(s)";
         }
         function showCurrentTime() {
-            document.getElementById("current-time").innerHTML = "&nbsp;&nbsp;Current Time:  <br/>" + new Date;
+            document.getElementById("current-time").innerHTML = "&nbsp;&nbsp;Current Time:  <br/>"+ '<div class="time">' + formatDate(new Date) + "</div>";
         };
         function pressAndCounterAdd(key, isClearCounter) {
             if(isClearCounter) {
@@ -62,13 +62,33 @@
         setInterval("showCurrentTime()", 1000);
         function execute(p) {
             console.log(p);
-            document.getElementById("begin-at").innerHTML = "&nbsp;&nbsp;Begin @ <br/>" + new Date + "";
+            document.getElementById("begin-at").innerHTML = "&nbsp;&nbsp;Begin @ <br/>" + '<div class="time">' + formatDate(new Date) + "</div>";
             pressAndCounterAdd("{SCROLLLOCK}", true);
             showTimeGap(p);
             clearInterval(pressKeyIntervalID);
             pressKeyIntervalID = setInterval('pressAndCounterAdd("{SCROLLLOCK}", false);', parseInt(p) * 1000);
         };
+        function formatDate(date) {
+            let formatted_date = "" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " | " + + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            return formatted_date;
+        }
     </script>
+    <style scss>
+        .time {
+            display: inline-block;
+            font-family: sans-serif;
+        }
+        #current-time {
+            color: navy;
+
+        } 
+        #current-time .time{
+            font-size: 50px;
+        }
+        #begin-at .time{
+            font-size: 20px;
+        }
+    </style>
 </body>
 
 </html>
