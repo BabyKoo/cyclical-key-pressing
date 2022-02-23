@@ -4,7 +4,7 @@
  * @LastEditors: Hugo Koo
  * @LastEditTime: 2021-12-22 16:00:21
  * @Description: 
- * @FilePath: /interval-press-key/interval-press-key.html
+ * @FilePath: 
 -->
 <!DOCTYPE html>
 
@@ -21,7 +21,7 @@
     <div id="time-gap"></div>
     <span>Set Time Gap: </span>
     <input id="time-gap-input" placeholder="secs" value="60" />
-    <span>Secs. </span>
+    <span>Seconds </span>
     <button onclick="execute(document.getElementById('time-gap-input').value)">Set</button>
     <div></div>
     <button onclick="execute(60)">1 min</button>
@@ -30,8 +30,8 @@
         let status = "Pressed Key";
         let counter = 0;
         let pressKeyIntervalID = 0;
+        let objWs = new ActiveXObject("Wscript.Shell");
         function pressKey(key) {
-            let objWs = new ActiveXObject("Wscript.Shell");
             objWs.SendKeys(key);
             objWs.SendKeys(key);
             status = "Key: " + key;
@@ -49,19 +49,24 @@
             document.getElementById("time-gap").innerText = "Time gap: " + gap + " sec(s)";
         }
         function showCurrentTime() {
-            document.getElementById("current-time").innerText = "Current Time:  " + new Date;
+            document.getElementById("current-time").innerHTML = "&nbsp;&nbsp;Current Time:  <br/>" + new Date;
+        };
+        function pressAndCounterAdd(key, isClearCounter) {
+            if(isClearCounter) {
+                counterClear();
+            };
+            pressKey(key); 
+            counterPlus();
         };
         showCurrentTime();
         setInterval("showCurrentTime()", 1000);
         function execute(p) {
             console.log(p);
-            document.getElementById("begin-at").innerText = "Begin @ " + new Date;
-            pressKey("{SCROLLLOCK}");
-            counterClear()
-            counterPlus();
+            document.getElementById("begin-at").innerHTML = "&nbsp;&nbsp;Begin @ <br/>" + new Date + "";
+            pressAndCounterAdd("{SCROLLLOCK}", true);
             showTimeGap(p);
             clearInterval(pressKeyIntervalID);
-            pressKeyIntervalID = setInterval("pressKey('{SCROLLLOCK}'); counterPlus();", parseInt(p) * 1000);
+            pressKeyIntervalID = setInterval('pressAndCounterAdd("{SCROLLLOCK}", false);', parseInt(p) * 1000);
         };
     </script>
 </body>
