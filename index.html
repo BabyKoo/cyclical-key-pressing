@@ -46,7 +46,7 @@
             document.getElementById("counter").innerText = "Counts: " + counter;
         }
         function showTimeGap(gap) {
-            document.getElementById("time-gap").innerText = "Time gap: " + gap + " sec(s)";
+            document.getElementById("time-gap").innerHTML = "Time gap: " + gap + "";
         }
         function showCurrentTime() {
             document.getElementById("current-time").innerHTML = "&nbsp;&nbsp;Current Time:  <br/>"+ '<div class="time">' + formatDate(new Date) + "</div>";
@@ -60,11 +60,23 @@
         };
         showCurrentTime();
         setInterval("showCurrentTime()", 1000);
+        function resolveSec(sec) {
+            var t = {d: 0, h: 0, min: 0, s: 0, str: ''};
+            t.d = Math.floor(sec / 86400);
+            t.h = Math.floor((sec % 86400) / 3600);
+            t.min = Math.floor((sec % 3600) / 60);
+            t.s = Math.floor(sec % 60 / 1);
+            t.str += t.d == 0 ? '' : t.d + "d ";
+            t.str += t.h == 0 ? '' : t.h + "h ";
+            t.str += t.min == 0 ? '' : t.min + "min ";
+            t.str += t.s == 0 ? '' : t.s + "s ";
+            return t;
+        }
         function execute(p) {
             console.log(p);
             document.getElementById("begin-at").innerHTML = "&nbsp;&nbsp;Begin @ <br/>" + '<div class="time">' + formatDate(new Date) + "</div>";
             pressAndCounterAdd("{SCROLLLOCK}", true);
-            showTimeGap(p);
+            showTimeGap(resolveSec(p).str);
             clearInterval(pressKeyIntervalID);
             pressKeyIntervalID = setInterval('pressAndCounterAdd("{SCROLLLOCK}", false);', parseInt(p) * 1000);
         };
@@ -80,7 +92,6 @@
         }
         #current-time {
             color: navy;
-
         } 
         #current-time .time{
             font-size: 50px;
